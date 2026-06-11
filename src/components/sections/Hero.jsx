@@ -97,12 +97,12 @@ export default function Hero() {
             Creative Krishna
           </motion.h1>
         </div>
-        <div className="overflow-hidden mb-8">
+        <div className="overflow-hidden mb-6 pb-4">
           <motion.h1
             initial={{ opacity: 0, y: 80 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.65, ease: [0.33, 1, 0.68, 1] }}
-            className="font-playfair italic text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-gold leading-none tracking-tight"
+            className="font-playfair italic text-4xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-gold leading-[1.08] tracking-tight"
           >
             Photography
           </motion.h1>

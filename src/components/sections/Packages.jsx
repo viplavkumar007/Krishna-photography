@@ -84,6 +84,103 @@ function PackageCard({ pkg }) {
   )
 }
 
+function MiniPackageCard({ mini, index, whatsappBase }) {
+  const isGold = index === 1
+  const isPlatinum = index === 2
+  const isDetailed = Boolean(mini.includes?.length || mini.duration)
+  const whatsappUrl = `${whatsappBase}${encodeURIComponent(
+    `Hi, I'm interested in ${mini.name} photography. Can we discuss?`
+  )}`
+
+  return (
+    <motion.a
+      variants={fadeUpVariant}
+      whileHover={{ y: -8, transition: { duration: 0.3 } }}
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group relative flex flex-col p-8 border text-center transition-all duration-500 ${
+        isGold
+          ? 'border-gold bg-dark text-white shadow-2xl shadow-gold/10'
+          : isPlatinum
+          ? 'border-gold/60 bg-cream hover:border-gold'
+          : 'border-gold/20 bg-cream hover:border-gold/60'
+      }`}
+    >
+      {isGold && (
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 label-text text-[10px] bg-gold text-white">
+          Popular Add-On
+        </div>
+      )}
+
+      <p className={`label-text tracking-widest3 mb-2 ${isGold ? 'text-gold' : 'text-muted'}`}>
+        {isPlatinum ? 'Premium Session' : 'Add-On Session'}
+      </p>
+      <h4 className={`font-playfair text-3xl mb-1 ${isGold ? 'text-white' : 'text-text-dark'}`}>
+        {mini.name}
+      </h4>
+      <p className={`body-text font-medium ${isGold ? 'text-white/80' : 'text-muted'}`}>
+        {mini.price}
+      </p>
+      {mini.priceNote && (
+        <p className="label-text text-gold text-[10px] tracking-widest mt-2">
+          {mini.priceNote}
+        </p>
+      )}
+
+      <div className={`w-8 h-px mx-auto mt-5 mb-6 ${isGold ? 'bg-gold' : 'bg-gold/40'}`} />
+
+      {isDetailed ? (
+        <div className="flex-1 text-left">
+          <p className={`label-text text-[10px] tracking-widest mb-4 ${isGold ? 'text-gold' : 'text-muted'}`}>
+            Includes
+          </p>
+          <ul className="space-y-3">
+            {mini.includes.map((item) => (
+              <li key={item} className="flex items-start gap-3">
+                <FaCheckCircle size={13} className="mt-1 flex-shrink-0 text-gold/80" />
+                <span className={`body-text text-sm leading-relaxed ${isGold ? 'text-white/70' : 'text-muted'}`}>
+                  {item}
+                </span>
+              </li>
+            ))}
+          </ul>
+          {mini.duration && (
+            <p className={`body-text text-sm font-medium mt-6 ${isGold ? 'text-white/80' : 'text-text-dark'}`}>
+              Duration: <span className="text-gold">{mini.duration}</span>
+            </p>
+          )}
+        </div>
+      ) : (
+        <div className="flex-1 flex items-center justify-center">
+          <p className={`body-text text-sm ${isGold ? 'text-white/70' : 'text-muted'}`}>
+            {mini.note || 'Custom coverage available'}
+          </p>
+        </div>
+      )}
+
+      <span
+        className={`mt-8 flex items-center justify-center gap-2 py-3.5 font-inter text-xs tracking-widest uppercase transition-all duration-300 ${
+          isGold
+            ? 'bg-gold text-white group-hover:bg-gold-dark'
+            : 'border border-gold/50 text-gold group-hover:bg-gold group-hover:text-white'
+        }`}
+      >
+        <FaWhatsapp size={14} />
+        Enquire Now
+      </span>
+    </motion.a>
+  )
+}
+
+const addOnServices = [
+  { service: 'Drone Coverage', price: '₹5,000/day' },
+  { service: 'Live Streaming', price: '₹15,000/event' },
+  { service: 'Raw Photos & Videos', price: '₹5,000' },
+  { service: 'Extra Album', price: '₹6,000' },
+  { service: 'Same-Day Edit Video', price: '₹3,000' },
+]
+
 export default function Packages() {
   const { ref, inView } = useScrollReveal()
   const { ref: gridRef, inView: gridInView } = useScrollReveal(0.05)
@@ -139,24 +236,51 @@ export default function Packages() {
           </motion.p>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {miniPackages.map((mini, i) => (
-              <motion.a
+              <MiniPackageCard
                 key={i}
-                variants={fadeUpVariant}
-                href={`${whatsappBase}${encodeURIComponent(`Hi, I'm interested in ${mini.name} photography. Can we discuss?`)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center justify-center p-8 border border-gold/20 hover:border-gold text-center transition-all duration-300 group hover:-translate-y-1"
-              >
-                <h4 className="font-playfair text-xl text-text-dark mb-1 group-hover:text-gold transition-colors duration-300">
-                  {mini.name}
-                </h4>
-                <p className="body-text text-muted font-medium mt-2">{mini.price}</p>
-                {mini.note && (
-                  <p className="label-text text-gold text-[10px] tracking-widest mt-2">{mini.note}</p>
-                )}
-              </motion.a>
+                mini={mini}
+                index={i}
+                whatsappBase={whatsappBase}
+              />
             ))}
           </div>
+
+          <motion.div
+            variants={fadeUpVariant}
+            className="mt-8 border border-gold/40 bg-dark p-8 text-white shadow-2xl shadow-gold/10"
+          >
+            <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div>
+                <p className="label-text text-gold tracking-widest3 mb-2">
+                  Extras
+                </p>
+                <h3 className="font-playfair text-3xl">
+                  Add-On Services
+                </h3>
+              </div>
+              <p className="body-text text-white/60 text-sm max-w-md md:text-right">
+                Enhance any package with extra coverage, delivery options, or premium production support.
+              </p>
+            </div>
+
+            <div className="w-8 h-px mt-6 mb-6 bg-gold" />
+
+            <div className="divide-y divide-white/10">
+              {addOnServices.map((item) => (
+                <div
+                  key={item.service}
+                  className="flex items-center justify-between gap-6 py-4"
+                >
+                  <span className="body-text text-white/80">
+                    {item.service}
+                  </span>
+                  <span className="font-inter text-sm font-semibold tracking-wide text-gold whitespace-nowrap">
+                    {item.price}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
 
         {/* Custom package note */}

@@ -235,9 +235,55 @@ export const packages = [
 ]
 
 export const miniPackages = [
-  { name: 'Engagement', price: '₹12,000 – ₹15,000', note: null },
-  { name: 'Birthday', price: '₹12,000 – ₹15,000', note: null },
-  { name: 'Pre-Wedding', price: '₹20,000 – ₹25,000', note: 'Drone upgrade available' },
+  {
+    name: 'Engagement',
+    price: '₹12,000 – ₹15,000',
+    includes: [
+      'Traditional Photography',
+      'Traditional Videography',
+      'DSLR Coverage',
+      '20 Sheet Album (14×40)',
+      'Full Event Video (45–60 Minutes)',
+      'Cinematic Upgrade Available',
+      'Highlight Video (if Cinematic chosen)',
+    ],
+    duration: '1 Day',
+  },
+  {
+    name: 'Birthday',
+    price: '₹12,000 – ₹15,000',
+    includes: [
+      'Traditional Photography',
+      'Traditional Videography',
+      'DSLR Coverage',
+      '20 Sheet Album (14×40)',
+      'Full Event Video (45–60 Minutes)',
+      'Cinematic Upgrade Available',
+      'Highlight Video (if Cinematic chosen)',
+    ],
+    duration: '1 Day',
+  },
+  {
+    name: 'Pre-Wedding',
+    price: '₹20,000 – ₹25,000',
+    priceNote: '₹25,000 with Drone',
+    includes: [
+      'Candid Photography',
+      'Full Cinematic Videography',
+      'Professional Cinematographer',
+      '2 Lightmen',
+      'Color Smoke Effects',
+      'Bonfire Setup',
+      'Tent Setup',
+      'Bubble Effects',
+      'Balloon Props',
+      '20 Sheet Special Album',
+      '10 Edited Photos',
+      'Custom Song Video (4–5 Minutes)',
+      'Teaser Film',
+    ],
+    duration: '1 Day',
+  },
 ]
 
 export const whyUs = [

@@ -5,6 +5,8 @@ import { brand, navLinks, services } from '../../data/siteContent'
 import { fadeUpVariant, staggerContainerVariant } from '../../utils/animations'
 import { useScrollReveal } from '../../hooks/useScrollReveal'
 
+const logoSrc = '/creative-krishna-logo-white.png'
+
 export default function Footer() {
   const { ref, inView } = useScrollReveal(0.1)
   const year = new Date().getFullYear()
@@ -27,8 +29,11 @@ export default function Footer() {
       >
         {/* Brand */}
         <motion.div variants={fadeUpVariant} className="lg:col-span-1">
-          <h3 className="font-playfair text-2xl text-white mb-1">{brand.shortName}</h3>
-          <p className="font-cormorant text-sm text-gold tracking-widest uppercase mb-6">Jamshedpur</p>
+          <img
+            src={logoSrc}
+            alt={brand.name}
+            className="h-20 w-64 max-w-full object-contain object-left mb-6"
+          />
           <p className="body-text text-white/50 leading-relaxed mb-6">
             Luxury wedding photography & cinematic films. Capturing love stories that last forever.
           </p>

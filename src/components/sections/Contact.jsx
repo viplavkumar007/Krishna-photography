@@ -18,6 +18,7 @@ const eventTypes = [
 function FloatingInput({ label, type = 'text', value, onChange, name, required, as }) {
   const hasValue = value?.length > 0
   const Tag = as || 'input'
+  const isDate = type === 'date'
 
   return (
     <div className="relative">
@@ -29,14 +30,16 @@ function FloatingInput({ label, type = 'text', value, onChange, name, required, 
         onChange={onChange}
         required={required}
         rows={as === 'textarea' ? 4 : undefined}
-        className={`w-full bg-transparent border-b border-gold/30 focus:border-gold pt-6 pb-2 font-inter text-sm text-text-dark outline-none transition-colors duration-300 resize-none peer ${as === 'textarea' ? 'min-h-[100px]' : ''}`}
+        className={`w-full bg-transparent border-b border-gold/30 focus:border-gold pb-2 font-inter text-sm text-text-dark outline-none transition-colors duration-300 resize-none peer ${
+          isDate ? 'pt-9' : 'pt-6'
+        } ${as === 'textarea' ? 'min-h-[100px]' : ''}`}
         placeholder=" "
         aria-label={label}
       />
       <label
         htmlFor={name}
         className={`absolute left-0 font-inter text-xs tracking-widest uppercase transition-all duration-300 pointer-events-none ${
-          hasValue
+          hasValue || isDate
             ? 'top-1 text-[10px] text-gold'
             : 'top-6 text-muted peer-focus:top-1 peer-focus:text-[10px] peer-focus:text-gold'
         }`}
